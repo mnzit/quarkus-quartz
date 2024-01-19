@@ -18,7 +18,6 @@ public class CreateJob {
     private Duration duration;
     private ZoneId zoneId = ZoneId.systemDefault();
 
-
     public Class<? extends Job> getJobClass() {
         return jobClass;
     }

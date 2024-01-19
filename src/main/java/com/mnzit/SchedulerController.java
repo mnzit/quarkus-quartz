@@ -22,12 +22,12 @@ public class SchedulerController {
     SchedulerService schedulerService;
 
     @GET
-    @Path("{name}")
+    @Path("{name}/{seconds}")
     @Produces(MediaType.TEXT_PLAIN)
-    public String schedule(@PathParam("name") String name) {
+    public String schedule(@PathParam("name") String name,@PathParam("seconds") Long seconds) {
         CreateJob createJob = new CreateJob();
         createJob.setJobClass(EventJob.class);
-        createJob.setDuration(Duration.ofSeconds(15));
+        createJob.setDuration(Duration.ofSeconds(seconds));
         createJob.setJobName(UUID.randomUUID().toString());
         createJob.setJobDescription("Test Job Description");
         createJob.setGroupName("TEST");
