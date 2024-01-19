@@ -50,7 +50,7 @@ public class ScheduledEventManager {
                             throw new RuntimeException("Parameter type not supported. Use JobDataMap type");
                         }
 
-                        scheduledMethods.put(scheduledEvent.name(), new BeanMethod(bean, method));
+                        scheduledMethods.put(scheduledEvent.value(), new BeanMethod(bean, method));
                     }
                 }
             }

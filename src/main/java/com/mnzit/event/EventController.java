@@ -19,13 +19,14 @@ public class EventController {
     @Inject
     Logger log;
 
-    @ScheduledEvent(name = "START_EVENT")
+    @ScheduledEvent("START_EVENT")
     public void runEvent(JobDataMap jobDataMap) {
-        log.info("Start event called");
+        log.info("Start Event called: "+ jobDataMap.get("name"));
+
     }
 
-    @ScheduledEvent(name = "END_EVENT")
+    @ScheduledEvent("END_EVENT")
     public void endEvent(JobDataMap jobDataMap) {
-        log.info("End event called");
+        log.info("End Event called: "+ jobDataMap.get("name"));
     }
 }
