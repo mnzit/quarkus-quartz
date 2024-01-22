@@ -1,9 +1,9 @@
 package com.mnzit.scheduler;
 
-import com.mnzit.producer.EventJobProducer;
+import com.mnzit.manager.ScheduledEventManager;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.json.bind.Jsonb;
+import org.jboss.logging.Logger;
 import org.quartz.JobDataMap;
 
 /**
@@ -16,13 +16,16 @@ public class EventJob extends AbstractJob {
 
 
     @Inject
-    EventJobProducer eventJobProducer;
+    Logger log;
 
     @Inject
-    Jsonb jsonb;
+    ScheduledEventManager scheduledEventManager;
 
     public void execute(JobDataMap jobDataMap) {
-        String request = jsonb.toJson(jobDataMap);
-        eventJobProducer.getEventJob().send(request);
+        try {
+            scheduledEventManager.invoke(jobDataMap);
+        } catch (Exception e) {
+            log.error("Exception: " + e.getMessage());
+        }
     }
 }
